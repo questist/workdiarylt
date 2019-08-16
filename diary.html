@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="diary.css">
+<meta charset="utf-8">
+<title>Diary Time Machine</title>
+	<style>
+		
+	</style>
+</head>
+
+<body>
+	<div id="app-diary">
+		<counter :elapsedtime="elapsedTime" :checkintime="checkInTime"></counter>
+		<ul class="entry-list">
+			<li>Start Time: {{ startTime }} <br>Ready For New Entries</li>
+			<time-stamps @selectentry="selectEntry" v-for="stamp in diaryItems" :item="stamp" :key="stamp.id"></time-stamps>
+		</ul>
+		<div class="display-tile">
+			<template v-if="isAddEntry === true">
+				<diary-item-entry @submitentry="submitEntry" @editentry="editEntry" :item="currentlyDisplayedEntry">
+				</diary-item-entry>
+			</template>
+			<template v-else>
+				<diary-item-display :item="currentlyDisplayedEntry">
+				</diary-item-display>
+			</template>
+			<hr>
+			<button @click="toggleDisplay">Toggle Display</button>
+		</div>
+	</div>
+	
+	
+</body>
+	<script src="vue.js"></script>
+	<script src="diary.js"></script>
+</html>
